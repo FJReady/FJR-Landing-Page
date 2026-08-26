@@ -212,9 +212,19 @@ anchors.
 
 ## Analytics
 
-Microsoft Clarity (project `y2r8wl01qz`) is loaded from the end of `<head>` in
-`index.html`. It records heatmaps and session replays. The snippet is async, so
-it never blocks the page render, and it is the only JavaScript on the site.
+Two trackers, both loaded from the end of `<head>` in `index.html`, both async
+so neither blocks the render. Between them they are the only JavaScript on the
+site.
+
+**Microsoft Clarity** (project `y2r8wl01qz`) records heatmaps and session
+replays.
+
+**Meta Pixel** (ID `1285489833562062`) fires `PageView` on load, and a `Lead`
+event from each pricing CTA — `content_name` distinguishes
+`20min_practice_session` from `60min_full_session`. Both handlers are guarded on
+`window.fbq`, so a blocked or failed pixel script cannot throw and stop the
+click reaching Calendly; blockers are common in this audience. The hero's "Book
+Now" is deliberately untagged, being a same-page jump rather than a booking.
 
 Two things worth knowing:
 
@@ -226,9 +236,15 @@ Two things worth knowing:
 
 To remove it, delete the `<script>` block at the end of `<head>`.
 
-`privacy.html` describes what Clarity collects. It is deliberately **not**
-tracked itself — the Clarity snippet is only in `index.html`. Add the same
-`<script>` block to `privacy.html` if you would rather track both.
+`privacy.html` describes what both collect — Clarity in section 1, the Pixel in
+section 2. It is deliberately **not** tracked itself: neither snippet is in
+`privacy.html`, so nobody is recorded while reading about being recorded.
+
+> Adding or removing a tracker means editing the notice in the same commit. The
+> Pixel's arrival also falsified two lines that had nothing to do with it: the
+> intro said information was collected in "two ways", and section 4 said we do
+> not use information for advertising. Both were corrected. Section numbering
+> shifted by one from the old section 2 onward.
 
 The notice is a starting draft written without access to primary sources, so
 it should be reviewed by someone qualified before the site takes real traffic.
@@ -236,8 +252,8 @@ it should be reviewed by someone qualified before the site takes real traffic.
 It carries **no contact details** by request. People who have booked can reach
 us by replying to their Calendly confirmation, and the notice says so; visitors
 who have not booked have no route to us except the OAIC. Adding an address
-later means restoring a short "Contact us" section and pointing sections 4, 6
-and 7 back at it.
+later means restoring a short "Contact us" section and pointing sections 5, 7
+and 8 back at it — the numbering shifted when the Pixel section was added.
 
 ## Performance
 
