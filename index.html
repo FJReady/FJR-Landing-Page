@@ -20,8 +20,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Only the weights the stylesheet actually uses: Lora at 600 (the
+         monogram) and 700 (headings, topic numerals); Inter at 400-700. Asking
+         for ranges rather than a list lets Google serve one variable file per
+         family instead of one file per weight. -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lora:wght@600..700&family=Inter:wght@400..700&display=swap"
       rel="stylesheet" />
 
     <link rel="stylesheet" href="css/style.css" />
@@ -72,16 +76,17 @@
     <section class="hero">
       <img
         class="hero__media"
-        src="images/hero-before-after.jpg"
+        src="images/hero-before-after.webp"
         srcset="
-          images/hero-before-after-960.jpg  960w,
-          images/hero-before-after.jpg     1823w
+          images/hero-before-after-960.webp  960w,
+          images/hero-before-after.webp     1823w
         "
         sizes="100vw"
         width="1823"
         height="863"
         alt=""
         aria-hidden="true"
+        fetchpriority="high"
         decoding="async" />
       <div class="container">
         <h1 class="hero__title">Practice an Interview Before the Real Thing</h1>
@@ -121,8 +126,8 @@
         <div class="coach">
           <img
             class="coach__photo"
-            src="images/coach.jpg"
-            srcset="images/coach-400.jpg 400w, images/coach.jpg 800w"
+            src="images/coach.webp"
+            srcset="images/coach-400.webp 400w, images/coach.webp 800w"
             sizes="(min-width: 768px) 16rem, 8rem"
             width="800"
             height="1000"
@@ -361,8 +366,8 @@
 
           <img
             class="after__photo"
-            src="images/outcome.jpg"
-            srcset="images/outcome-480.jpg 480w, images/outcome.jpg 880w"
+            src="images/outcome.webp"
+            srcset="images/outcome-480.webp 480w, images/outcome.webp 880w"
             sizes="(min-width: 768px) 26rem, 100vw"
             width="880"
             height="660"

@@ -239,6 +239,52 @@ who have not booked have no route to us except the OAIC. Adding an address
 later means restoring a short "Contact us" section and pointing sections 4, 6
 and 7 back at it.
 
+## Performance
+
+A PageSpeed run on 21 August measured **FCP 2.7s, LCP 3.5s, Speed Index 4.3s**,
+with **TBT 0ms and CLS 0** — no JavaScript cost, no layout shift. Its largest
+single finding was *render-blocking requests, est. saving 1,930ms*.
+
+Three of the four fixes are done:
+
+1. **Fonts trimmed to what the CSS uses.** The page used to request nine files —
+   Lora at 400/500/600/700 and Inter at 300/400/500/600/700. Only six were ever
+   applied: Lora 600 (the monogram) and 700 (headings, topic numerals), Inter
+   400–700. The URL now asks for ranges (`wght@600..700`, `wght@400..700`),
+   which lets Google serve one variable file per family rather than one per
+   weight.
+2. **Every image is WebP**, no JPEG fallback. 390 KB → 185 KB, **53% less**, and
+   the hero — the largest contentful paint — drops from 40 KB to 14 KB at the
+   size a phone fetches. Measured against the JPEGs, the mean channel difference
+   is 1.5–2.2 out of 255, and the hero sits under a scrim besides. WebP has been
+   universal since 2020, so a `<picture>` fallback would have doubled the file
+   count and created a trap: replace only the `.jpg` and every modern browser
+   keeps serving the stale `.webp`.
+3. **`fetchpriority="high"` on the hero.** Images sit at low priority until
+   layout proves them visible; the attribute says so up front. This is the run's
+   *LCP request discovery* item. Deliberately **no `<link rel=preload>`** — that
+   would name the hero's filename in a second place, and a stale one silently
+   downloads the photo twice.
+
+### Still open
+
+**Self-hosting the fonts** is the rest of the 1,930ms: it removes a
+render-blocking stylesheet on a third-party origin, along with two DNS lookups
+and two TLS handshakes. It needs the `.woff2` files committed here, which has to
+be done by hand — download the Lora and Inter latin subsets, drop them in
+`fonts/`, and replace the Google `<link>` with local `@font-face` rules.
+
+The cost is that changing typography stops being a one-line URL edit.
+
+**Cache lifetimes** (the run's *85 KiB* finding) cannot be fixed on GitHub
+Pages, which serves everything with a ten-minute lifetime and offers no way to
+configure headers. A custom domain behind a CDN is the only route.
+
+**Deliberately not done:** inlining the CSS. `css/style.css` is shared by all
+three pages, so inlining means either three copies that drift apart or a
+"critical" subset that drifts from the whole. It is the smaller half of the
+render-blocking figure and the larger half of the maintenance cost.
+
 ## Local preview
 
 No build tools required. From the project root:
@@ -282,8 +328,8 @@ two places the accent colour appears.
 
 | File | Size | Dimensions |
 | --- | --- | --- |
-| `images/hero-before-after.jpg` | 103 KB | 1823 × 863 |
-| `images/hero-before-after-960.jpg` | 40 KB | 960 × 454 |
+| `images/hero-before-after.webp` | 31 KB | 1823 × 863 |
+| `images/hero-before-after-960.webp` | 14 KB | 960 × 454 |
 
 Served through `srcset` with `sizes="100vw"`, so phones fetch the 960 px file
 and desktops the full one.
@@ -359,8 +405,8 @@ large enough to carry a face.
 
 | File | Size | Dimensions |
 | --- | --- | --- |
-| `images/coach.jpg` | 110 KB | 800 × 1000 |
-| `images/coach-400.jpg` | 32 KB | 400 × 500 |
+| `images/coach.webp` | 69 KB | 800 × 1000 |
+| `images/coach-400.webp` | 20 KB | 400 × 500 |
 
 Supplied as a 2.1 MB PNG at 1086 × 1448 — a 3:4 frame, where the slot is 4:5.
 The 91 px difference comes off the top, since there is generous headroom above
@@ -384,8 +430,8 @@ above or below where it would read as decoration between two sections.
 
 | File | Size | Dimensions |
 | --- | --- | --- |
-| `images/outcome.jpg` | 75 KB | 880 × 660 |
-| `images/outcome-480.jpg` | 30 KB | 480 × 360 |
+| `images/outcome.webp` | 34 KB | 880 × 660 |
+| `images/outcome-480.webp` | 15 KB | 480 × 360 |
 
 Supplied as a 1.9 MB PNG at 1448 × 1086, already a clean 4:3, so it needed no
 crop. Re-encoded to progressive JPEG at quality 82 in two sizes through
