@@ -86,6 +86,24 @@
     <!-- End Meta Pixel Code -->
   </head>
   <body>
+    <!-- In-app browser escape hatch ------------------------------------------
+      Hidden by default and unhidden by the script at the end of this file, for
+      visitors inside the Facebook or Instagram in-app browser only. Buttons can
+      silently fail there, which is invisible to us and looks like a broken site
+      to them.
+    -->
+    <div id="iab-banner" class="iab-banner" role="status" hidden>
+      <p>
+        Having trouble tapping a button? Tap
+        <strong>⋯</strong> or <strong>⋮</strong> in the top corner of this
+        screen and choose <strong>"Open in Browser"</strong> for the best
+        experience.
+      </p>
+      <button type="button" id="iab-banner-close" aria-label="Dismiss">
+        &times;
+      </button>
+    </div>
+
     <!-- Masthead -------------------------------------------------------------
       The logo is live text rather than an image, so it stays crisp at any
       size, is selectable and readable by screen readers, and the flanking
@@ -489,5 +507,29 @@
         </p>
       </div>
     </footer>
+
+    <!-- Detection for the banner at the top of this file. A single regex over
+         the user agent — no dependency, in keeping with the rest of the site.
+         Newer versions of these in-app browsers sometimes drop the identifying
+         tokens, so a few affected visitors will not see it. -->
+    <script>
+      (function () {
+        var ua = navigator.userAgent || "";
+        var isInAppBrowser = /FBAN|FBAV|FB_IAB|Instagram/i.test(ua);
+        if (!isInAppBrowser) return;
+
+        var banner = document.getElementById("iab-banner");
+        if (!banner) return;
+
+        banner.hidden = false;
+
+        var closeBtn = document.getElementById("iab-banner-close");
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function () {
+            banner.hidden = true;
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

@@ -979,3 +979,47 @@ h3 {
     transform: none;
   }
 }
+
+/* ==========================================================================
+   In-app browser escape banner
+   --------------------------------------------------------------------------
+   Shown only to visitors inside the Facebook/Instagram in-app browser, where
+   buttons can silently fail. Detected and unhidden by the script at the foot
+   of index.html.
+
+   The [hidden] rule at the end is load-bearing: display: flex above would
+   otherwise beat the browser's own [hidden] { display: none }, and the banner
+   would show for everybody.
+   ========================================================================== */
+
+.iab-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgb(var(--accent-gold));
+  color: rgb(var(--forest));
+  font-size: 0.875rem;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.iab-banner p {
+  margin: 0;
+  flex: 1;
+}
+
+.iab-banner button {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: rgb(var(--forest));
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.iab-banner[hidden] {
+  display: none;
+}
