@@ -427,104 +427,6 @@ h3 {
 }
 
 /* ==========================================================================
-   What we coach — a row of equal cards
-   --------------------------------------------------------------------------
-   Grid rather than flex so the three cards share a row height automatically,
-   however unevenly the copy divides between them.
-   ========================================================================== */
-
-.topics {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-}
-
-/* The cards carry colour of their own — a sage bar along the top edge and a
-   sage wash fading out of the top-left corner — so they read as cards on either
-   ground, tinted or plain cream. Their face is only a shade off the page. */
-.topic {
-  position: relative;
-  overflow: hidden;
-  padding: 1.75rem 1.5rem 1.5rem;
-  border: 1px solid rgb(var(--primary) / 0.25);
-  border-radius: 0.75rem;
-  background: radial-gradient(
-      130% 100% at 0% 0%,
-      rgb(var(--primary) / 0.14) 0%,
-      rgb(var(--primary) / 0) 62%
-    ),
-    rgb(var(--surface));
-  box-shadow: 0 1px 2px 0 rgb(43 43 40 / 0.06);
-  transition: box-shadow 300ms, border-color 300ms, transform 300ms;
-}
-
-.topic::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: rgb(var(--primary));
-}
-
-/* The lift matches the pricing cards. Border and shadow carry the state on
-   their own, so hover still reads where the transform does not run — reduced
-   motion, or a browser that has dropped it.
-
-   Guarded on (hover: hover) so a tap on a touch screen, which has no way to
-   leave an element, cannot strand a card in its hover state. */
-@media (hover: hover) {
-  .topic:hover {
-    border-color: rgb(var(--primary));
-    box-shadow: 0 12px 20px -6px rgb(43 43 40 / 0.16),
-      0 4px 8px -4px rgb(43 43 40 / 0.12);
-    transform: translateY(-0.25rem);
-  }
-}
-
-/* Numeral and title share a row, so the numeral anchors the heading instead of
-   floating above it. Alignment is to the top, since the titles wrap to two
-   lines in a narrow card. */
-.topic__head {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-/* A rounded square, not the filled circle the steps section uses, so the two
-   numbered sections do not read as the same component. Cream on this face
-   measures 4.2:1, clearing the 3:1 needed at 20px bold. */
-.topic__num {
-  flex-shrink: 0;
-  width: 2.25rem;
-  height: 2.25rem;
-  display: grid;
-  place-items: center;
-  border-radius: 0.625rem;
-  background: rgb(var(--button-face));
-  color: rgb(var(--on-forest));
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.topic__title {
-  padding-top: 0.3125rem; /* optically centres line one against the numeral */
-  font-size: 1.0625rem;
-  text-wrap: balance;
-}
-
-.topic__body {
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: rgb(var(--muted-foreground));
-}
-
-/* ==========================================================================
    Pricing
    ========================================================================== */
 
@@ -955,27 +857,21 @@ h3 {
   .packages {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  .topics {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 /* ==========================================================================
    Reduced motion
    --------------------------------------------------------------------------
-   Two components now lift on hover, so honour the preference in one place.
+   The pricing cards lift on hover; honour the preference in one place.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   .package,
-  .topic,
   .button {
     transition: none;
   }
 
-  .package:hover,
-  .topic:hover {
+  .package:hover {
     transform: none;
   }
 }
@@ -1022,4 +918,28 @@ h3 {
 
 .iab-banner[hidden] {
   display: none;
+}
+
+/* ==========================================================================
+   Condensed coaching topics
+   --------------------------------------------------------------------------
+   What the sessions cover, sitting directly above the prices so the value and
+   the cost are read together. Replaced the three-card "What We Coach" section.
+   ========================================================================== */
+
+.coach-topics {
+  list-style: none;
+  margin: 0 auto 2rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 30rem;
+  text-align: center;
+}
+
+.coach-topics li {
+  font-size: 0.9375rem;
+  color: rgb(var(--muted-foreground));
+  line-height: 1.5;
 }

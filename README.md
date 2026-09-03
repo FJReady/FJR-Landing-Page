@@ -15,11 +15,13 @@ static files.
 breakpoints, card treatments, hover states and gradient dividers are all derived
 from the original Manus markup.
 
-Section order has since diverged. It now runs: hero, Why Me?, What We
-Coach, Coaching Packages, What Happens After You Book, FAQ. Tinted and plain
-backgrounds alternate down the page, so adding or reordering a section means
-checking that `.section--tinted` still lands on every other one — reordering the
-two coaching sections meant moving the class between them.
+Section order has since diverged. It now runs: hero, Why Me?, Coaching
+Packages, What Happens After You Book, FAQ.
+
+Tinted and plain backgrounds were alternating down the page, and folding "What
+We Coach" into the pricing section broke that: "Why Me?" and "Coaching
+Packages" are now both `.section--tinted`, back to back. Removing the class
+from either one restores the rhythm — left as-is pending a decision.
 
 "Why Me?" replaced "About Your Coach": same slot, first-person copy, and
 three trust markers (`.trust`) sitting side by side under the prose instead of
@@ -30,41 +32,29 @@ flex row whether they fit on one line depends on the metrics of whichever font
 has loaded, and a single orphaned badge on a second row is the one outcome worth
 ruling out.
 
-"What We Coach" is a row of three equal cards (`.topics` / `.topic`). Grid gives
-them a shared row height whatever length the copy runs to.
+What the sessions cover used to be its own section — three numbered cards under
+a "What We Coach" heading. It is now three plain lines (`.coach-topics`) sitting
+directly above the prices, so the value and the cost are read together instead
+of a section apart. The `.topics` / `.topic` rules went with it, along with
+`.topic` in the reduced-motion block, which would otherwise have been a selector
+matching nothing.
 
-Each card is numbered. The numeral sits in a filled chip on the same row as the
-title, so it anchors the heading rather than floating above it, and the chip is
-a **rounded square** — "What Happens After You Book" numbers its steps with
-filled circles, and reusing that shape here would make two unrelated sections
-read as the same component.
+### Hover on the pricing cards
 
-The `<ol>` carries the numbering semantically while the visible numerals are
-`aria-hidden`, so a screen reader announces each item's position once rather
-than twice.
-
-The cards carry their own colour, because the section behind them is tinted and
-a plain white panel on tinted ground barely reads as a card: a 4px sage bar
-along the top edge, a sage wash fading out of the top-left corner, and the
-numeral chip in `--button-face` with cream type (4.2:1, against the 3:1 needed
-at 20px bold).
-
-### Hover on the cards
-
-Both card types — `.topic` and `.package` — lift 4px on hover, with a darker
-border and a heavier shadow. Three things about that:
+`.package` lifts 4px on hover, with a darker border and a heavier shadow. Three
+things about that:
 
 - The border and shadow carry the state **on their own**, so the hover still
   reads when the transform does not run.
 - The transform does not run under `prefers-reduced-motion: reduce`; that block
-  sits at the bottom of `css/style.css`.
-- All the hover rules are wrapped in `@media (hover: hover)`, so a tap on a
-  touch screen cannot strand a card in its hover state. Phones and tablets
-  therefore show no hover at all, by design.
+  sits near the bottom of `css/style.css`.
+- The hover rules are wrapped in `@media (hover: hover)`, so a tap on a touch
+  screen cannot strand a card in its hover state. Phones and tablets therefore
+  show no hover at all, by design.
 
-**Copy has since moved on.** The hero and "What We Coach" were rewritten, and
-"Why Me?" and the FAQ are new. Only the pricing cards, the steps and the
-footer still carry original wording.
+**Copy has since moved on.** The hero was rewritten, "Why Me?" and the FAQ are
+new, and the coaching topics were condensed into the pricing section. Only the
+pricing cards, the steps and the footer still carry original wording.
 
 **Audience is early-career, not teens.** The word "teen" appears nowhere on the
 site — the framing is anyone early in their career, including first jobs, career
