@@ -286,6 +286,19 @@ three pages, so inlining means either three copies that drift apart or a
 "critical" subset that drifts from the whole. It is the smaller half of the
 render-blocking figure and the larger half of the maintenance cost.
 
+## Stylesheet caching
+
+The three pages link the stylesheet as `css/style.css?v=YYYYMMDD`. GitHub Pages
+serves assets with a ten-minute cache and offers no way to configure headers, so
+a browser that has `style.css` will keep using it — and since the filename never
+changes, a CSS-only change can land on the server and stay invisible for a while.
+That is not theoretical: it happened twice, and the second time produced a page
+with new markup styled by the old rules.
+
+**Bump the `?v=` date whenever `css/style.css` changes.** The query string makes
+it a different URL, so the browser has to fetch it. It costs nothing and it is
+the only reliable fix short of a custom domain behind a CDN.
+
 ## Local preview
 
 No build tools required. From the project root:
