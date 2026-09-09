@@ -114,20 +114,6 @@ h3 {
   padding-inline: var(--gutter);
 }
 
-/* Available to screen readers, invisible on screen. Used to give struck-through
-   and replacement prices spoken labels, since line-through is not announced. */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* Hairline divider between sections */
 .rule {
   height: 0.25rem;
@@ -427,143 +413,6 @@ h3 {
 }
 
 /* ==========================================================================
-   Pricing
-   ========================================================================== */
-
-.packages {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-.package {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 2rem;
-  border-radius: 0.75rem;
-  /* Mitres the full-bleed banner to the card's rounded top corners. */
-  overflow: hidden;
-  border: 1px solid rgb(var(--primary) / 0.25);
-  background: rgb(var(--surface));
-  box-shadow: 0 1px 2px 0 rgb(43 43 40 / 0.06);
-  transition: box-shadow 300ms, border-color 300ms, transform 300ms;
-}
-
-/* Same (hover: hover) guard as the topic cards, for the same reason. */
-@media (hover: hover) {
-  .package:hover {
-    border-color: rgb(var(--primary));
-    box-shadow: 0 12px 20px -6px rgb(43 43 40 / 0.16),
-      0 4px 8px -4px rgb(43 43 40 / 0.12);
-    transform: translateY(-0.25rem);
-  }
-}
-
-.package--featured {
-  border: 2px solid rgb(var(--primary));
-  box-shadow: 0 4px 6px -1px rgb(43 43 40 / 0.1),
-    0 2px 4px -2px rgb(43 43 40 / 0.1);
-}
-
-@media (hover: hover) {
-  .package--featured:hover {
-    border-color: rgb(var(--primary));
-    box-shadow: 0 20px 25px -5px rgb(43 43 40 / 0.12),
-      0 8px 10px -6px rgb(43 43 40 / 0.12);
-  }
-}
-
-/* A banner across the head of the card. Negative margins pull it out to the
-   padding edge; the card's own overflow: hidden mitres it to the rounded top
-   corners, so it needs no radius of its own and nothing to maintain if the
-   card's radius or border width changes.
-
-   The two are coloured apart so they read as different kinds of label rather
-   than competing for the same attention: Deep Forest with cream type (9.02:1)
-   is the default, and the sale takes the terracotta sweep into champagne —
-   terracotta's only use here, and the brighter of the two treatments, on the
-   card the page is discounting. */
-.package__banner {
-  margin: -2rem -2rem 0;
-  padding: 0.6rem 1rem;
-  background: rgb(var(--forest));
-  color: rgb(var(--on-forest));
-  font-size: 0.75rem;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-/* Charcoal on the sweep, 5.28:1 at its darkest stops. White would fall to
-   1.71:1 over the champagne, which is why the label is not cream here. */
-.package__banner--sale {
-  background: linear-gradient(
-    115deg,
-    rgb(var(--accent)) 0%,
-    rgb(var(--accent-gold)) 55%,
-    rgb(var(--accent-gold)) 70%,
-    rgb(var(--accent)) 100%
-  );
-  color: rgb(var(--foreground));
-}
-
-.package__head {
-  margin-bottom: 1.5rem;
-}
-
-.package__name {
-  font-size: 1.25rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Sans-serif: the price is UI text, not a headline. */
-.package__price {
-  font-size: 1.875rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: rgb(var(--forest));
-  margin-bottom: 0.25rem;
-}
-
-/* Superseded price. <s> already carries the line-through; this only sets the
-   subordinate size and weight so the live price stays dominant. The spoken
-   "Was" / "now" labels live in the markup, because line-through is not
-   announced by screen readers. */
-.package__price-was {
-  margin-right: 0.4rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: rgb(var(--muted-foreground));
-}
-
-.package__duration {
-  font-size: 0.875rem;
-  color: rgb(var(--muted-foreground));
-}
-
-/* Optional line for a sale end date — commented out in the markup until a
-   date exists, so adding one is a text edit rather than a rebuild. */
-.package__sale-note {
-  margin-top: 0.35rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgb(var(--forest));
-}
-
-.package__body {
-  font-size: 0.875rem;
-  line-height: 1.625;
-  color: rgb(var(--muted-foreground));
-  margin-bottom: 2rem;
-}
-
-/* ==========================================================================
    Button
    --------------------------------------------------------------------------
    The CTAs are anchors — they navigate to Calendly — styled as buttons.
@@ -590,12 +439,6 @@ h3 {
   box-shadow: 0 4px 6px -1px rgb(43 43 40 / 0.12),
     0 2px 4px -2px rgb(43 43 40 / 0.12);
   transition: background-color 200ms, box-shadow 200ms;
-}
-
-/* Pin the CTA to the bottom of its card so the buttons line up across
-   packages whatever length the descriptions run to. */
-.package .button {
-  margin-top: auto;
 }
 
 /* Sized to its label instead of its container. The pricing buttons fill their
@@ -853,26 +696,18 @@ h3 {
   .section__title {
     font-size: 2.25rem;
   }
-
-  .packages {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 /* ==========================================================================
    Reduced motion
    --------------------------------------------------------------------------
-   The pricing cards lift on hover; honour the preference in one place.
+   Nothing transforms on the page any more — the cards that lifted on hover
+   went with the pricing section — so this covers the button's colour fade.
    ========================================================================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .package,
   .button {
     transition: none;
-  }
-
-  .package:hover {
-    transform: none;
   }
 }
 

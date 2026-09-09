@@ -16,7 +16,7 @@ breakpoints, card treatments, hover states and gradient dividers are all derived
 from the original Manus markup.
 
 Section order has since diverged. It now runs: hero, Why Me?, Client Feedback,
-Coaching Packages, What Happens After You Book, FAQ.
+What Happens After You Book, FAQ.
 
 "Client Feedback" carries the first client testimonial, placed between the
 coach's account of himself and the price: his word, then a client's, then the
@@ -40,9 +40,9 @@ has loaded, and a single orphaned badge on a second row is the one outcome worth
 ruling out.
 
 What the sessions cover used to be its own section — three numbered cards under
-a "What We Coach" heading. It is now three plain lines (`.coach-topics`) sitting
-directly above the prices, so the value and the cost are read together instead
-of a section apart. The `.topics` / `.topic` rules went with it, along with
+a "What We Coach" heading, then three plain lines above the prices. With the
+prices gone it sits at the foot of "Why Me?" (`.coach-topics`), as part of the
+case for the coach rather than next to a number. The `.topics` / `.topic` rules went with it, along with
 `.topic` in the reduced-motion block, which would otherwise have been a selector
 matching nothing.
 
@@ -168,44 +168,33 @@ and "Most Popular" is Deep Forest with cream type (9.02:1). Two identical
 banners would have read as one repeated component rather than as two different
 kinds of claim.
 
+## The funnel
+
+The page sells a **free 15-minute discovery call**, not a session. One call to
+action, in the hero, opening Calendly. Mark takes the call with the young
+person, the parent, or both, then follows up with a written recommendation and
+a price; the parent books and pays for coaching separately, through links sent
+by hand.
+
+That replaced a direct-pay funnel — two priced packages on the page, booked
+straight from it. **The paid Calendly event types still exist and still work.**
+They are simply no longer linked from this site, so `.package*` and the pricing
+section went with them. Restoring that funnel means restoring markup and CSS,
+not recreating the booking links.
+
+One consequence worth watching: the page now has exactly **one** conversion
+point, where it used to have three. Everything below the hero is supporting
+argument with nothing to click, so anything that pushes that button further
+down the hero costs more than it used to.
+
 ## Booking
 
-The two pricing CTAs are anchors pointing at Calendly, opening in a new tab so
-the landing page stays put.
+One CTA, in the hero, pointing at
+`calendly.com/firstjobready/free-discovery-call`. It opens in a new tab so the
+page stays put, and fires a Meta `Lead` event tagged `free_discovery_call`.
 
-The hero's "Book Now" is **not** one of them: it is an in-page anchor to
-`#pricing`, so the visitor picks a package before Calendly opens. It stays in the
-same tab, and `scroll-behavior: smooth` on `html` glides down instead of jumping
-— set inside `@media (prefers-reduced-motion: no-preference)`, so anyone who has
-asked for less motion gets the instant jump. `.section` carries a
-`scroll-margin-top` so the heading does not land flush against the top edge.
-
-Unlike the card buttons it is sized to its label, via `.button--inline`. The
-card buttons are `width: 100%` to fill their cards; that same rule in the hero
-would run a button the full width of the page.
-
-| CTA | Event |
-| --- | --- |
-| Practice Interview + Feedback | `calendly.com/firstjobready/20min` |
-| Full Coaching Session | `calendly.com/firstjobready/60-minute-mock-interview-coaching-session` |
-
-Both card durations match the copy on their cards.
-
-The 20-minute session is on sale: `$39` struck through with `<s>`, `$29` beside
-it. Because line-through is not announced by screen readers, the markup carries
-`visually-hidden` "Was" and "now" labels, so it reads as *"Was $39, now $29"*.
-No end date is set; `.package__sale-note` is styled and sits commented out in
-the markup, so adding "Sale ends …" later is a text edit.
-
-Since both buttons read "Book Now", each carries an `aria-label` naming its
-package so they are distinguishable out of context.
-
-In the pricing cards the buttons are pinned to the bottom edge with
-`margin-top: auto`, so they sit on the same line across both cards however
-long the descriptions run.
-
-To open bookings in the same tab instead, drop `target` and `rel` from the
-anchors.
+The two paid event types — `/20min` and the 60-minute session — are unlinked
+from the site but still live in Calendly.
 
 ## Analytics
 
@@ -216,12 +205,11 @@ site.
 **Microsoft Clarity** (project `y2r8wl01qz`) records heatmaps and session
 replays.
 
-**Meta Pixel** (ID `1285489833562062`) fires `PageView` on load, and a `Lead`
-event from each pricing CTA — `content_name` distinguishes
-`20min_practice_session` from `60min_full_session`. Both handlers are guarded on
-`window.fbq`, so a blocked or failed pixel script cannot throw and stop the
-click reaching Calendly; blockers are common in this audience. The hero's "Book
-Now" is deliberately untagged, being a same-page jump rather than a booking.
+**Meta Pixel** (ID `1285489833562062`) fires `PageView` on load, and a single
+`Lead` event tagged `free_discovery_call` from the hero CTA — the only
+conversion point on the page since the paid packages came off it. The handler is
+guarded on `window.fbq`, so a blocked or failed pixel script cannot throw and
+stop the click reaching Calendly; blockers are common in this audience.
 
 Two things worth knowing:
 

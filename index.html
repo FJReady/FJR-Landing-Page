@@ -144,23 +144,36 @@
         fetchpriority="high"
         decoding="async" />
       <div class="container">
-        <h1 class="hero__title">Practice an Interview Before the Real Thing</h1>
+        <h1 class="hero__title">
+          Give your young person somewhere to practice where the only person in
+          the room is on their side.
+        </h1>
         <div class="hero__body">
           <p>
-            Most people don't lose the interview on experience. They lose it on
-            nerves — and not knowing what we're actually looking for.
+            Most young people applying for their first job don't lose the
+            interview on experience. They lose it on nerves — and not knowing
+            what a hiring manager is actually looking for.
           </p>
           <p>
-            This session fixes that. Real practice, real feedback, from someone
-            who's sat on the other side of the table.
+            Start with a free 15-minute chat — with them, with you, or both.
+            We'll talk through what's making them nervous, and I'll follow up
+            with the best way to help.
           </p>
-          <p>Online or in person, Perth.</p>
+          <p>Online, Perth-based.</p>
         </div>
 
-        <!-- Jumps down the page rather than opening Calendly: the visitor
-             picks a package first. Same-tab, same-page anchor, so no target. -->
+        <!-- Opens Calendly directly now — there is no pricing section to jump
+             to first. Fires a Lead event tagged for the free call, since this
+             is the only conversion point left on the page. -->
         <p class="hero__actions">
-          <a class="button button--inline" href="#pricing">Book Now</a>
+          <a
+            class="button button--inline"
+            href="https://calendly.com/firstjobready/free-discovery-call"
+            target="_blank"
+            rel="noopener noreferrer"
+            onclick="if(window.fbq){fbq('track','Lead',{content_name:'free_discovery_call'});}">
+            Book a Free Chat
+          </a>
         </p>
       </div>
     </section>
@@ -262,6 +275,15 @@
             <span>3+ years experience as a hiring manager</span>
           </li>
         </ul>
+
+        <!-- What the sessions cover. It lived above the pricing cards until
+             the paid packages came off the page; it belongs with the case for
+             the coach now, not with a price. -->
+        <ul class="coach-topics">
+          <li>Making a strong first and last impression</li>
+          <li>Handling tough, pressure-test questions</li>
+          <li>Preparing answers specific to the role you're going for</li>
+        </ul>
       </div>
     </section>
 
@@ -288,76 +310,6 @@
       </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="section section--tinted" id="pricing">
-      <div class="container">
-        <h2 class="section__title section__title--center">Coaching Packages</h2>
-
-        <!-- What the sessions cover, condensed from the section this replaced,
-             so the value sits beside the price rather than a screen above it. -->
-        <ul class="coach-topics">
-          <li>Making a strong first and last impression</li>
-          <li>Handling tough, pressure-test questions</li>
-          <li>Preparing answers specific to the role you're going for</li>
-        </ul>
-
-        <div class="packages">
-          <div class="package">
-            <div class="package__banner package__banner--sale">Sale Price</div>
-            <div class="package__head">
-              <h3 class="package__name">Practice Interview + Feedback</h3>
-              <p class="package__price">
-                <s class="package__price-was">
-                  <span class="visually-hidden">Was </span>$39
-                </s>
-                <span class="visually-hidden">now </span>$29
-              </p>
-              <p class="package__duration">20 minutes</p>
-              <!-- When an end date is set for the sale, uncomment and edit:
-              <p class="package__sale-note">Sale ends 30 September</p>
-              -->
-            </div>
-            <p class="package__body">
-              Have a go at a real interview, with real questions and written
-              feedback to work from.
-            </p>
-            <a
-              class="button"
-              href="https://calendly.com/firstjobready/20min"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Book the Practice Interview and Feedback session"
-              onclick="if(window.fbq){fbq('track','Lead',{content_name:'20min_practice_session'});}">
-              Book Now
-            </a>
-          </div>
-
-          <div class="package package--featured">
-            <div class="package__banner">Most Popular</div>
-            <div class="package__head">
-              <h3 class="package__name">Full Coaching Session</h3>
-              <p class="package__price">$89</p>
-              <p class="package__duration">60 minutes</p>
-            </div>
-            <p class="package__body">
-              Turn your practice interview into feedback and coaching. Work on
-              what will help you feel confident, then finish with a mock
-              interview in real conditions.
-            </p>
-            <a
-              class="button"
-              href="https://calendly.com/firstjobready/60-minute-mock-interview-coaching-session"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Book the Full Coaching Session"
-              onclick="if(window.fbq){fbq('track','Lead',{content_name:'60min_full_session'});}">
-              Book Now
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <div class="rule" role="presentation"></div>
 
     <!-- After booking ---------------------------------------------------------
@@ -375,18 +327,21 @@
           <ol class="steps">
             <li class="step">
               <span class="step__marker" aria-hidden="true">1</span>
-              <h3 class="step__title">Pick an available session</h3>
+              <h3 class="step__title">
+                Book a time that works — a 15-minute slot, online
+              </h3>
             </li>
             <li class="step">
               <span class="step__marker" aria-hidden="true">2</span>
               <h3 class="step__title">
-                Choose whether you'd like to attend in person or online
+                We chat — with them, with you, or both, whatever's easiest
               </h3>
             </li>
             <li class="step">
               <span class="step__marker" aria-hidden="true">3</span>
               <h3 class="step__title">
-                Attend the session, we'll guide you through
+                You get a plan — including pricing, if a coaching session makes
+                sense
               </h3>
             </li>
           </ol>
@@ -419,46 +374,44 @@
 
         <div class="faq">
           <details class="faq__item">
-            <summary>What happens in the session?</summary>
+            <summary>Is it really free?</summary>
             <p>
-              For the 60-minute session: a mock interview, coaching on what to
-              improve, then a second mock interview so you can see the
-              difference. The 20-minute session is a single practice interview
-              with written feedback.
+              Yes. The 15-minute chat doesn't cost anything. If I think a
+              coaching session would help, I'll send you the details and pricing
+              afterward — nothing's charged without you seeing it first.
+            </p>
+          </details>
+
+          <details class="faq__item">
+            <summary>Do I need to be on the call?</summary>
+            <p>
+              Not necessarily — the call can be with your young person, with
+              you, or both, whatever's easiest.
             </p>
           </details>
 
           <details class="faq__item">
             <summary>Online or in person?</summary>
             <p>
-              Both. Online sessions run by video; in-person sessions are held at
-              a coworking space in Perth.
+              The free chat is online, by video or phone. If we move ahead with
+              a coaching session, that can be online or in person.
             </p>
           </details>
 
           <details class="faq__item">
             <summary>What kind of jobs is this for?</summary>
             <p>
-              Whether it's your first job, a career change, or getting back into
-              the workforce — if you have an interview coming up, or you're
-              getting ready to start applying, this is for you.
+              Whether it's their first job, a career change, or getting back
+              into the workforce — if they have an interview coming up, or are
+              getting ready to start applying, this is for them.
             </p>
           </details>
 
           <details class="faq__item">
-            <summary>What if I don't have an interview booked yet?</summary>
+            <summary>What if they don't have an interview booked yet?</summary>
             <p>
               That's fine — this works just as well as general preparation
               before applying as it does before a specific interview.
-            </p>
-          </details>
-
-          <details class="faq__item">
-            <summary>What if we need to reschedule or cancel?</summary>
-            <p>
-              At least 6 hours' notice to reschedule. One free reschedule is
-              allowed for a missed session without notice; a second no-show
-              forfeits the session.
             </p>
           </details>
         </div>
