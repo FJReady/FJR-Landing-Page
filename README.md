@@ -15,8 +15,15 @@ static files.
 breakpoints, card treatments, hover states and gradient dividers are all derived
 from the original Manus markup.
 
-Section order has since diverged. It now runs: hero, Why Me?, Coaching
-Packages, What Happens After You Book, FAQ.
+Section order has since diverged. It now runs: hero, Why Me?, Client Feedback,
+Coaching Packages, What Happens After You Book, FAQ.
+
+"Client Feedback" carries the first client testimonial, placed between the
+coach's account of himself and the price: his word, then a client's, then the
+ask. The heading is deliberately not "Testimonials" while there is only one —
+it should change when there are several. `.testimonial` reuses the corner wash
+and hairline the old coaching cards had, so two or three quotes can sit in a
+grid there later without a rebuild.
 
 Tinted and plain backgrounds were alternating down the page, and folding "What
 We Coach" into the pricing section broke that: "Why Me?" and "Coaching

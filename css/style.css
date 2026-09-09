@@ -943,3 +943,44 @@ h3 {
   color: rgb(var(--muted-foreground));
   line-height: 1.5;
 }
+
+/* ==========================================================================
+   Testimonial
+   --------------------------------------------------------------------------
+   Single quote card for now — the sage corner wash and hairline are the same
+   treatment the coaching cards used, so a second and third quote can sit
+   beside this one in a grid later without a rebuild.
+   ========================================================================== */
+
+.testimonial {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.75rem;
+  border: 1px solid rgb(var(--primary) / 0.25);
+  border-radius: 0.75rem;
+  background: radial-gradient(
+      130% 100% at 0% 0%,
+      rgb(var(--primary) / 0.14) 0%,
+      rgb(var(--primary) / 0) 62%
+    ),
+    rgb(var(--surface));
+  box-shadow: 0 1px 2px 0 rgb(43 43 40 / 0.06);
+  text-align: center;
+}
+
+.testimonial__quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: rgb(var(--foreground));
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.testimonial__attribution {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgb(var(--muted-foreground));
+  font-style: normal;
+}
