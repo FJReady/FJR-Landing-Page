@@ -756,27 +756,40 @@ h3 {
 }
 
 /* ==========================================================================
-   Condensed coaching topics
+   Coaching topics
    --------------------------------------------------------------------------
-   What the sessions cover, sitting directly above the prices so the value and
-   the cost are read together. Replaced the three-card "What We Coach" section.
+   What the sessions cover, at the foot of "Why Me?".
+
+   These were centred in a narrow column when they sat above the pricing cards,
+   which read as a caption there and read as three stray lines here, jammed
+   under the trust badges. Ranged left with the rest of the section now, marked
+   as a list, and with room above them.
    ========================================================================== */
 
 .coach-topics {
   list-style: none;
-  margin: 0 auto 2rem;
+  margin: 2.5rem 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: 30rem;
-  text-align: center;
+  gap: 0.6rem;
+  max-width: 34rem;
 }
 
 .coach-topics li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
   font-size: 0.9375rem;
   color: rgb(var(--muted-foreground));
   line-height: 1.5;
+}
+
+.coach-topics li::before {
+  content: "\2713";
+  flex: none;
+  font-weight: 700;
+  color: rgb(var(--primary));
 }
 
 /* ==========================================================================
