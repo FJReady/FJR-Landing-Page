@@ -221,9 +221,13 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Favours the right of the frame, where the handshake is. The anxious half
-     crops away first on narrow screens, which is the half worth losing. */
-  object-position: 64% center;
+  /* Anchored left of centre, into the glass and street behind the subject.
+     From 1280px the image fills the width exactly, so this has no effect there
+     and the whole frame shows. It only bites on narrow screens, where the
+     window is about a third of the frame: anchored right, the crop slices his
+     face down the middle and the headline lands across his eyes. A backdrop
+     with a shoulder entering at bottom right beats half a face. */
+  object-position: 40% center;
 }
 
 /* Base scrim is near-uniform and heavy: on narrow screens the crop is

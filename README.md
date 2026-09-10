@@ -344,22 +344,45 @@ two places the accent colour appears.
 
 | File | Size | Dimensions |
 | --- | --- | --- |
-| `images/hero-before-after.webp` | 31 KB | 1823 × 863 |
-| `images/hero-before-after-960.webp` | 14 KB | 960 × 454 |
+| `images/hero-interview.webp` | 43 KB | 1822 × 863 |
+| `images/hero-interview-960.webp` | 16 KB | 960 × 455 |
 
 Served through `srcset` with `sizes="100vw"`, so phones fetch the 960 px file
 and desktops the full one.
 
 ### Provenance
 
-The photo arrived in the repo as `hero-before-after.jpg.png` — a 1.46 MB **PNG**
-with a doubled extension, so the page could not find it. It was re-encoded here
-to progressive JPEG at quality 82 (4:2:2 chroma), which is a **94% reduction**
-with no visible loss at this size, especially under the scrim. The misnamed
-original was removed.
+The first hero was a handshake across a desk, encoded at WebP quality 72 for
+31 KB. It was replaced by a portrait of a young man dressed for an interview,
+which is the reader the headline addresses.
 
-If the photo is ever replaced, re-encode rather than dropping a PNG in: a
-full-width photo as PNG costs well over a megabyte on the first paint.
+That swap changed the encoding budget. The old image was a dark, low-detail
+scene where quality 72 was invisible; a face is not. Measured against the
+source over the head region, quality 72 gives a mean error of 2.93/255 and
+quality 82 gives 2.39, so the full-size file is encoded at 82 and costs 13 KB
+more. The 960 px file sits at 78 — on a phone the face is smaller, and after
+the crop below it is usually not in frame at all.
+
+If the photo is replaced again, re-encode rather than dropping a PNG in: a
+full-width photo as PNG costs well over a megabyte on the first paint. The
+source PNG here was 1.7 MB, a **97% reduction**.
+
+### The crop
+
+`object-position` is `40% center` — left of centre, into the glass and street
+behind the subject. From 1280 px the image fills the width exactly, so the
+property has no effect there and the whole frame shows, face included.
+
+It only matters on narrow screens, where `cover` scales to the hero's height
+and leaves a window about a third of the frame wide. Anchored right, at the
+subject, that window slices his face down the middle and the headline lands
+across his eyes. Anchored left it gives blurred glass with a shoulder entering
+at bottom right, which reads as a deliberate backdrop.
+
+The cost is that phones do not see his face. Fixing that properly needs art
+direction — a `<picture>` with a separately composed portrait crop behind a
+`media` query — not `srcset`, whose `w` descriptors are for resolution
+switching and may hand the same file to a desktop.
 
 ### Why it does not break if the image goes missing
 
