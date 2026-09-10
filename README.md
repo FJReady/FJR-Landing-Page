@@ -39,12 +39,14 @@ flex row whether they fit on one line depends on the metrics of whichever font
 has loaded, and a single orphaned badge on a second row is the one outcome worth
 ruling out.
 
-What the sessions cover used to be its own section — three numbered cards under
-a "What We Coach" heading, then three plain lines above the prices. With the
-prices gone it sits at the foot of "Why Me?" (`.coach-topics`), as part of the
-case for the coach rather than next to a number. The `.topics` / `.topic` rules went with it, along with
-`.topic` in the reduced-motion block, which would otherwise have been a selector
-matching nothing.
+What the sessions cover is no longer on the page. It went through three homes —
+its own "What We Coach" section of numbered cards, then three plain lines above
+the prices, then a ticked list at the foot of "Why Me?" — and was cut from the
+last of them. The page now makes its case through the coach and the client
+rather than through a syllabus, and the free call is where the specifics get
+discussed. The `.topics` / `.topic` and `.coach-topics` rules were removed with
+each move, along with `.topic` in the reduced-motion block, which would
+otherwise have been a selector matching nothing.
 
 ### Hover on the pricing cards
 

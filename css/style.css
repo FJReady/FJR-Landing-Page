@@ -756,52 +756,6 @@ h3 {
 }
 
 /* ==========================================================================
-   Coaching topics
-   --------------------------------------------------------------------------
-   What the sessions cover, at the foot of "Why Me?".
-
-   These were centred in a narrow column when they sat above the pricing cards,
-   which read as a caption there and read as three stray lines here, jammed
-   under the trust badges. Ranged left with the rest of the section now, marked
-   as a list, and with room above them.
-   ========================================================================== */
-
-/* Without this line the three ticks are legible but unexplained — the reader
-   has to infer what they are a list of. */
-.coach-topics__lead {
-  margin: 2.5rem 0 0.85rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: rgb(var(--forest));
-}
-
-.coach-topics {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  max-width: 34rem;
-}
-
-.coach-topics li {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-  font-size: 0.9375rem;
-  color: rgb(var(--muted-foreground));
-  line-height: 1.5;
-}
-
-.coach-topics li::before {
-  content: "\2713";
-  flex: none;
-  font-weight: 700;
-  color: rgb(var(--primary));
-}
-
-/* ==========================================================================
    Testimonial
    --------------------------------------------------------------------------
    Single quote card for now — the sage corner wash and hairline are the same
